@@ -1,6 +1,6 @@
 <template>
   <h1>Create your account! 🚀</h1>
-  <v-form ref="form" @submit.prevent="signup">
+  <v-form ref="form" @submit.prevent="signUp">
     <v-text-field label="Email *" required :rules="[rules.required]"></v-text-field>
     <v-text-field label="Username *" required :rules="[rules.required]"></v-text-field>
     <v-text-field
@@ -26,7 +26,7 @@ const router = useRouter()
 const rules = {
   required: (value: string) => !!value || 'Required.'
 }
-const signup = () => {
+const signUp = () => {
   console.log('User signed up.')
   router.push({ path: '/' })
 }

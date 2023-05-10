@@ -1,5 +1,6 @@
 import MyHome from './views/MyHome.vue'
 import SignUp from './views/SignUp.vue'
+import SignIn from './views/SignIn.vue'
 
 export const routes = [
   {
@@ -11,5 +12,10 @@ export const routes = [
     path: '/signup',
     name: 'signup',
     component: SignUp
+  },
+  {
+    path: '/signin',
+    name: 'signin',
+    component: SignIn
   }
 ]

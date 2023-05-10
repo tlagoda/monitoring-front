@@ -1,10 +1,26 @@
-<script setup lang="ts">
-</script>
-
 <template>
-  <h1>My App</h1>
+  <v-app>
+    <v-main>
+      <HelloWorld/>
+    </v-main>
+  </v-app>
 </template>
 
-<style scoped>
+<script lang="ts">
+import { defineComponent } from 'vue'
+import HelloWorld from './components/HelloWorld.vue'
 
-</style>
+export default defineComponent({
+  name: 'App',
+
+  components: {
+    HelloWorld,
+  },
+
+  data () {
+    return {
+      //
+    }
+  },
+})
+</script>

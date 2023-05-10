@@ -1,26 +1,14 @@
 <template>
   <v-app>
     <v-main>
-      <HelloWorld/>
+      <h1>{{ title }}</h1>
+      <v-btn>Add performance</v-btn>
     </v-main>
   </v-app>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts" setup>
+import { ref } from 'vue'
 
-export default defineComponent({
-  name: 'App',
-
-  components: {
-    HelloWorld,
-  },
-
-  data () {
-    return {
-      //
-    }
-  },
-})
+const title = ref('My App')
 </script>

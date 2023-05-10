@@ -1,9 +1,6 @@
 <template>
   <v-app>
-    <v-main>
-      <h1>{{ title }}</h1>
-      <v-btn>Add performance</v-btn>
-    </v-main>
+    <router-view></router-view>
   </v-app>
 </template>
 

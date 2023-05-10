@@ -5,7 +5,7 @@ import { loadFonts } from './plugins/webfontloader'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from './routes'
 
-const router = createRouter({
+export const router = createRouter({
   history: createWebHistory(),
   routes
 })

@@ -1,12 +1,7 @@
 <template>
   <h1>Sign in! 🔥</h1>
   <v-form ref="form" @submit.prevent="signIn">
-    <v-text-field
-      label="Email"
-      required
-      :rules="[rules.required]"
-      v-model="email"
-    ></v-text-field>
+    <v-text-field label="Email" required :rules="[rules.required]" v-model="email"></v-text-field>
     <v-text-field
       label="Password"
       type="password"
@@ -43,9 +38,13 @@ const signIn = async () => {
       router.push('/')
     } else {
       signInError.value = response.message
+      email.value = ''
+      password.value = ''
     }
   } catch (error: any) {
     signInError.value = error.message
+    email.value = ''
+    password.value = ''
   }
 }
 </script>

@@ -1,4 +1,11 @@
 export type Credentials = {
-  email: string,
+  email: string
   password: string
+}
+
+export type NewUser = {
+  username: string
+  email: string
+  password: string
+  sexe: 'M' | 'F' | 'unknown'
 }

@@ -38,12 +38,10 @@ const signIn = async () => {
       router.push('/')
     } else {
       signInError.value = response.message
-      email.value = ''
       password.value = ''
     }
   } catch (error: any) {
     signInError.value = error.message
-    email.value = ''
     password.value = ''
   }
 }

@@ -3,7 +3,8 @@ import type { Credentials } from '@/types/auth/types'
 import axios from 'axios'
 
 export class AuthService {
-  async login(credentials: Credentials) {
+
+  static async login(credentials: Credentials) {
     try {
       const response = await axios.post(`${URLs.BACK_URL}/auth/login`, credentials)
       return response.data

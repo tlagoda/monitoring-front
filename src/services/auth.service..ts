@@ -6,9 +6,12 @@ export class AuthService {
   static async signup(newUser: NewUser) {
     try {
       const response = await axios.post(`${URLs.BACK_URL}/auth/signup`, newUser)
-      return response.data
+      return {
+        statusCode: response.status,
+        data: response.data,
+      };
     } catch (err: any) {
-      throw err.response.data
+      throw err.response.data;
     }
   }
 

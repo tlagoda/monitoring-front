@@ -27,7 +27,9 @@
       :rules="[rules.required]"
     ></v-text-field>
     <p v-if="signUpError" class="error-message">{{ signUpError }}</p>
-    <v-btn type="submit" color="red">Sign up</v-btn>
+    <div class="d-flex align-center justify-center">
+      <v-btn type="submit" color="red">Sign up</v-btn>
+    </div>
   </v-form>
 </template>
 
@@ -52,7 +54,11 @@ const rules = {
 const signUp = async () => {
   try {
     const response = await AuthService.signup(newUser)
-    
+    if (response.statusCode === 201) {
+      router.push('/')
+    } else {
+      signUpError.value = "Canno't sign up."
+    }
   } catch (err: any) {
     signUpError.value = err.message
   }
@@ -70,9 +76,5 @@ h1 {
 
 .v-btn {
   width: 45%;
-}
-
-.error-message {
-  color: red;
 }
 </style>

@@ -10,8 +10,9 @@
       v-model="password"
     ></v-text-field>
     <p v-if="signInError" class="error-message">{{ signInError }}</p>
-    <v-btn type="submit" color="red">Sign in</v-btn>
-  </v-form>
+    <div class="d-flex align-center justify-center">
+      <v-btn type="submit" color="red">Sign in</v-btn>
+    </div>  </v-form>
 </template>
 
 <script lang="ts" setup>
@@ -58,9 +59,5 @@ h1 {
 
 .v-btn {
   width: 45%;
-}
-
-.error-message {
-  color: red;
 }
 </style>

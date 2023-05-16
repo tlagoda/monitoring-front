@@ -14,7 +14,9 @@
       <v-btn type="submit" color="red">Sign in</v-btn>
     </div>
   </v-form>
-  <div class="signup-link">Not registered yet? <router-link to="/signup">Sign up</router-link></div>
+  <div class="signup-link">
+    Not registered yet? <router-link style="color: inherit" to="/signup">Sign up</router-link>
+  </div>
 </template>
 
 <script lang="ts" setup>

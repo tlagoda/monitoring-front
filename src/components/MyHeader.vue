@@ -1,19 +1,45 @@
 <template>
-  <v-app-bar app color="primary">
+  <v-app-bar app color="primary" dark>
     <v-row align="center" no-gutters>
-      <v-col cols="auto">
-        <v-img :src="logo" alt="Logo" width="40px" class="mr-2" />
+      <v-col cols="2">
+        <span class="headline">Perf.io</span>
       </v-col>
-      <v-col cols="auto">
-        <span class="text-secondary">Power Monitor</span>
+      <v-col cols="8">
+        <v-row align="center">
+          <v-col cols="1">
+            <p>Hello</p>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="1">
+            <p>Hello</p>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="1">
+            <v-img :src="logo" alt="logo" height="60px" />
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="1">
+            <p>Hello</p>
+          </v-col>
+          <v-spacer></v-spacer>
+          <v-col cols="1">
+            <p>Hello</p>
+          </v-col>
+        </v-row>
       </v-col>
       <v-spacer></v-spacer>
+      <v-col cols="2">
+        <v-avatar>
+          <v-img :src="avatar" alt="Avatar" height="40px" />
+        </v-avatar
+      ></v-col>
     </v-row>
   </v-app-bar>
 </template>
 
 <script lang="ts" setup>
 import logo from '@/assets/dumbbell.png'
+import avatar from '@/assets/test.jpeg'
 </script>
 
 <style scoped>
@@ -30,5 +56,10 @@ import logo from '@/assets/dumbbell.png'
 
 .router-link {
   text-decoration: none;
+}
+
+.headline {
+  font-size: 30px;
+  font-weight: bold;
 }
 </style>

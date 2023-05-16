@@ -8,10 +8,10 @@ export class AuthService {
       const response = await axios.post(`${URLs.BACK_URL}/auth/signup`, newUser)
       return {
         statusCode: response.status,
-        data: response.data,
-      };
+        data: response.data
+      }
     } catch (err: any) {
-      throw err.response.data;
+      throw err.response.data
     }
   }
 

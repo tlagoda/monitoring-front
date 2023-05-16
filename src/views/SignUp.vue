@@ -24,7 +24,7 @@
       label="Confirm Password *"
       type="password"
       required
-      :rules="[rules.required]"
+      :rules="[rules.required, rules.passwordMatch]"
     ></v-text-field>
     <p v-if="signUpError" class="error-message">{{ signUpError }}</p>
     <div class="d-flex align-center justify-center">
@@ -32,7 +32,7 @@
     </div>
   </v-form>
   <div class="signin-link">
-    Already have an account? <router-link to="/signin">Sign in</router-link>
+    Already have an account? <router-link to="/signin" style="color: inherit">Sign in</router-link>
   </div>
 </template>
 
@@ -52,7 +52,8 @@ const newUser: NewUser = reactive({
 const signUpError = ref('')
 
 const rules = {
-  required: (value: string) => !!value || 'Required.'
+  required: (value: string) => !!value || 'Required.',
+  passwordMatch: (value: string) => value === newUser.password || "Passwords don't match."
 }
 const signUp = async () => {
   try {

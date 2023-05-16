@@ -1,4 +1,5 @@
 import MyHome from './views/MyHome.vue'
+import DefaultLayout from './layouts/DefaultLayout.vue'
 import SignUp from './views/SignUp.vue'
 import SignIn from './views/SignIn.vue'
 import AddPerformance from './views/AddPerformance.vue'
@@ -6,8 +7,12 @@ import AddPerformance from './views/AddPerformance.vue'
 export const routes = [
   {
     path: '/',
-    name: 'home',
-    component: MyHome
+    component: DefaultLayout,
+    children: {
+      path: '',
+      component: MyHome,
+      name: 'home'
+    }
   },
   {
     path: '/signup',

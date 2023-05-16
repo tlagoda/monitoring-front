@@ -12,7 +12,9 @@
     <p v-if="signInError" class="error-message">{{ signInError }}</p>
     <div class="d-flex align-center justify-center">
       <v-btn type="submit" color="red">Sign in</v-btn>
-    </div>  </v-form>
+    </div>
+  </v-form>
+  <div class="signup-link">Not registered yet? <router-link to="/signup">Sign up</router-link></div>
 </template>
 
 <script lang="ts" setup>
@@ -59,5 +61,9 @@ h1 {
 
 .v-btn {
   width: 45%;
+}
+
+.signup-link {
+  margin: 20px auto 0 auto;
 }
 </style>

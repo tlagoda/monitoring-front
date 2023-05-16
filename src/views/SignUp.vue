@@ -31,6 +31,9 @@
       <v-btn type="submit" color="red">Sign up</v-btn>
     </div>
   </v-form>
+  <div class="signin-link">
+    Already have an account? <router-link to="/signin">Sign in</router-link>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -76,5 +79,9 @@ h1 {
 
 .v-btn {
   width: 45%;
+}
+
+.signin-link {
+  margin: 20px auto 0 auto;
 }
 </style>

@@ -1,5 +1,15 @@
 <template>
-  
+  <v-app-bar app color="primary">
+    <v-row align="center" no-gutters>
+      <v-col cols="auto">
+        <v-img :src="logo" alt="Logo" width="40px" class="mr-2" />
+      </v-col>
+      <v-col cols="auto">
+        <span class="text-secondary">Power Monitor</span>
+      </v-col>
+      <v-spacer></v-spacer>
+    </v-row>
+  </v-app-bar>
 </template>
 
 <script lang="ts" setup>

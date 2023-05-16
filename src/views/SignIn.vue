@@ -1,8 +1,8 @@
 <template>
   <h1>Sign in! 🔥</h1>
-  <v-form ref="form" @submit.prevent="signIn">
-    <v-text-field label="Email" required :rules="[rules.required]" v-model="email"></v-text-field>
-    <v-text-field
+  <!-- <form ref="form" @submit.prevent="signIn">
+    <text-field label="Email" required :rules="[rules.required]" v-model="email"></v-text-field>
+    <text-field
       label="Password"
       type="password"
       required
@@ -14,7 +14,7 @@
       <v-btn type="submit" color="red">Sign in</v-btn>
     </div>
   </v-form>
-  <div class="signup-link">Not registered yet? <router-link to="/signup">Sign up</router-link></div>
+  <div class="signup-link">Not registered yet? <router-link to="/signup">Sign up</router-link></div> -->
 </template>
 
 <script lang="ts" setup>

@@ -1,15 +1,30 @@
 <template>
-  <v-app-bar app color="primary" dark>
-    <v-toolbar-title>
-      <img src="/path/to/dumbbell-logo.png" alt="Logo" height="40px" />
-    </v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-avatar>
-      <img src="/path/to/avatar.png" alt="Avatar" height="40px" />
-    </v-avatar>
+  <v-app-bar app color="primary">
+    <v-row align="center" no-gutters>
+      <v-col cols="auto">
+        <v-img :src="logo" alt="Logo" width="40px" class="mr-2" />
+      </v-col>
+      <v-col cols="auto">
+        <span class="text-secondary">Power Monitor</span>
+      </v-col>
+      <v-spacer></v-spacer>
+    </v-row>
   </v-app-bar>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import logo from '@/assets/dumbbell.png'
+</script>
 
-<style scoped></style>
+<style scoped>
+.v-app-bar {
+  padding: 0 15px;
+}
+
+.mb-1 {
+  margin-bottom: 0.5rem;
+}
+.mt-0 {
+  margin-top: 0;
+}
+</style>

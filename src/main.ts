@@ -1,7 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import vuetify from './plugins/vuetify'
-import { loadFonts } from './plugins/webfontloader'
 import { createRouter, createWebHistory } from 'vue-router'
 import { routes } from './routes'
 
@@ -10,6 +8,4 @@ export const router = createRouter({
   routes
 })
 
-loadFonts()
-
-createApp(App).use(router).use(vuetify).mount('#app')
+createApp(App).use(router).mount('#app')

@@ -28,7 +28,7 @@
         </v-row>
       </v-col>
       <v-spacer></v-spacer>
-      <v-col cols="2">
+      <v-col cols="2" align="right">
         <v-avatar>
           <v-img :src="avatar" alt="Avatar" height="40px" />
         </v-avatar
@@ -61,5 +61,9 @@ import avatar from '@/assets/test.jpeg'
 .headline {
   font-size: 30px;
   font-weight: bold;
+}
+
+.v-avatar {
+  margin-right: 40px;
 }
 </style>

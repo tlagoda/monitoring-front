@@ -8,11 +8,13 @@ export const routes = [
   {
     path: '/',
     component: DefaultLayout,
-    children: {
-      path: '',
-      component: MyHome,
-      name: 'home'
-    }
+    children: [
+      {
+        path: '',
+        component: MyHome,
+        name: 'home',
+      },
+    ],
   },
   {
     path: '/signup',

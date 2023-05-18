@@ -1,6 +1,6 @@
 <template>
   <div class="my-component">
-    <h1>HOME</h1>
+    <h1>Your performances! 🔥</h1>
     <div class="perf-container">
       <v-card
         v-for="perf in performances"
@@ -15,7 +15,8 @@
             <li>Weight: {{ perf.weight }} kgs</li>
             <li>Rest time: {{ perf.restTime }}s</li>
             <li>
-              Muscles: <span v-for="muscle in perf.muscles" :key="muscle">{{ `${muscle} / ` }} </span>
+              Muscles:
+              <span v-for="muscle in perf.muscles" :key="muscle">{{ `${muscle} / ` }} </span>
             </li>
             <li>Total weight: {{ perf.totalWeight }} kgs</li>
           </ul>
@@ -39,7 +40,12 @@ onBeforeMount(async () => {
 
 <style scoped>
 .my-component {
-  margin-top: 60px;
+  margin: 60px 0;
+}
+
+h1 {
+  margin: 50px auto;
+  text-align: center;
 }
 
 .perf-container {

@@ -6,7 +6,10 @@
         v-for="perf in performances"
         :key="perf.internalId"
         :title="perf.exercise"
-        width="200px"
+        width="250px"
+        append-icon="mdi-arm-flex"
+        elevation="12"
+        rounded="lg"
       >
         <v-card-content>
           <ul>
@@ -44,7 +47,7 @@ onBeforeMount(async () => {
 }
 
 h1 {
-  margin: 50px auto;
+  margin: 70px auto 50px auto;
   text-align: center;
 }
 
@@ -52,7 +55,7 @@ h1 {
   width: 90vw;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
 }
 </style>

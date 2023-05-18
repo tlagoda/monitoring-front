@@ -30,8 +30,7 @@
       <v-spacer></v-spacer>
       <v-col cols="2" align="right">
         <v-avatar>
-          <v-img :src="avatar" alt="Avatar" height="40px" />
-        </v-avatar
+          <v-img :src="avatar" alt="Avatar" height="40px" /> </v-avatar
       ></v-col>
     </v-row>
   </v-app-bar>
@@ -45,6 +44,7 @@ import avatar from '@/assets/test.jpeg'
 <style scoped>
 .v-app-bar {
   padding: 0 15px;
+  height: 60px;
 }
 
 .mb-1 {

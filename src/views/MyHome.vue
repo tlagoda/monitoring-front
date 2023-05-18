@@ -58,4 +58,8 @@ h1 {
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
 }
+
+.v-card {
+  padding: 5px 25px;
+}
 </style>

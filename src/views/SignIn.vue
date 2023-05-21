@@ -1,6 +1,6 @@
 <template>
   <h1>Sign in! 🔥</h1>
-  <v-form ref="form" @submit.prevent="signIn">
+  <!-- <v-form ref="form" @submit.prevent="signIn">
     <v-text-field label="Email" required :rules="[rules.required]" v-model="email"></v-text-field>
     <v-text-field
       label="Password"
@@ -16,7 +16,7 @@
   </v-form>
   <div class="signup-link">
     Not registered yet? <router-link style="color: inherit" to="/signup">Sign up</router-link>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>

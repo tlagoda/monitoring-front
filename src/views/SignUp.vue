@@ -1,6 +1,6 @@
 <template>
   <h1>Create your account! 🚀</h1>
-  <v-form ref="form" @submit.prevent="signUp">
+  <!-- <v-form ref="form" @submit.prevent="signUp">
     <v-text-field
       label="Email *"
       required
@@ -33,7 +33,7 @@
   </v-form>
   <div class="signin-link">
     Already have an account? <router-link to="/signin" style="color: inherit">Sign in</router-link>
-  </div>
+  </div> -->
 </template>
 
 <script lang="ts" setup>

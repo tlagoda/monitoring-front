@@ -5,6 +5,13 @@
     <InputText type="text" v-model="newUser.email" placeholder="Email" />
     <InputText type="text" v-model="newUser.password" placeholder="Password" />
     <InputText type="text" placeholder="Confirm Password" />
+    <Dropdown
+      v-model="newUser.sexe"
+      :options="allowedSexes"
+      optionLabel="name"
+      placeholder="Sexe"
+      class="w-full md:w-14rem"
+    />
     <Button label="Submit" type="submit" />
   </form>
 
@@ -16,17 +23,20 @@
 <script lang="ts" setup>
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
+import Dropdown from 'primevue/dropdown'
 import { AuthService } from '@/services/auth.service.'
 import type { NewUser } from '@/types/auth/types'
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
+const allowedSexes = [{ name: 'Male' }, { name: 'Female' }, { name: 'None' }]
+
 const newUser: NewUser = reactive({
   username: '',
   email: '',
   password: '',
-  sexe: 'M'
+  sexe: 'unknown'
 })
 const signUpError = ref('')
 

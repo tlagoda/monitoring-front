@@ -1,42 +1,21 @@
 <template>
   <h1>Create your account! 🚀</h1>
-  <!-- <v-form ref="form" @submit.prevent="signUp">
-    <v-text-field
-      label="Email *"
-      required
-      :rules="[rules.required]"
-      v-model="newUser.email"
-    ></v-text-field>
-    <v-text-field
-      label="Username *"
-      required
-      :rules="[rules.required]"
-      v-model="newUser.username"
-    ></v-text-field>
-    <v-text-field
-      label="Password *"
-      type="password"
-      required
-      :rules="[rules.required]"
-      v-model="newUser.password"
-    ></v-text-field>
-    <v-text-field
-      label="Confirm Password *"
-      type="password"
-      required
-      :rules="[rules.required, rules.passwordMatch]"
-    ></v-text-field>
-    <p v-if="signUpError" class="error-message">{{ signUpError }}</p>
-    <div class="d-flex align-center justify-center">
-      <v-btn type="submit" color="red">Sign up</v-btn>
-    </div>
-  </v-form>
+  <form @submit:prevent="signUp">
+    <InputText type="text" class="custom-input" v-model="newUser.username" placeholder="Username" />
+    <InputText type="text" v-model="newUser.email" placeholder="Email" />
+    <InputText type="text" v-model="newUser.password" placeholder="Password" />
+    <InputText type="text" placeholder="Confirm Password" />
+    <Button label="Submit" type="submit" />
+  </form>
+
   <div class="signin-link">
     Already have an account? <router-link to="/signin" style="color: inherit">Sign in</router-link>
-  </div> -->
+  </div>
 </template>
 
 <script lang="ts" setup>
+import InputText from 'primevue/inputtext'
+import Button from 'primevue/button'
 import { AuthService } from '@/services/auth.service.'
 import type { NewUser } from '@/types/auth/types'
 import { reactive, ref } from 'vue'
@@ -69,17 +48,27 @@ const signUp = async () => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 h1 {
   margin: 3vh auto 5vh auto;
 }
-.v-form {
+form {
   width: 30vw;
   margin: 0 auto;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.v-btn {
-  width: 45%;
+  :deep(.p-inputtext) {
+    width: 15rem;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+
+  :deep(.p-button) {
+    font-size: 1.5rem;
+    padding: 0.5rem 1.5rem;
+  }
 }
 
 .signin-link {

@@ -3,6 +3,7 @@ import DefaultLayout from './layouts/DefaultLayout.vue'
 import SignUp from './views/SignUp.vue'
 import SignIn from './views/SignIn.vue'
 import AddPerformance from './views/AddPerformance.vue'
+import MyPerformances from './views/MyPerformances.vue'
 
 export const routes = [
   {
@@ -12,9 +13,14 @@ export const routes = [
       {
         path: '',
         component: MyHome,
-        name: 'home',
+        name: 'home'
       },
-    ],
+      {
+        path: 'performances',
+        component: MyPerformances,
+        name: 'performances'
+      }
+    ]
   },
   {
     path: '/signup',

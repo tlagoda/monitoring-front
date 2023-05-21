@@ -6,7 +6,7 @@
         v-for="perf in performances"
         :key="perf.internalId"
         :title="perf.exercise"
-        width="250px"
+        width="230px"
         append-icon="mdi-arm-flex"
         elevation="12"
         rounded="lg"
@@ -55,7 +55,7 @@ h1 {
   width: 90vw;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 40px;
 }
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <my-header></my-header>
     <router-view />
   </div>
 </template>

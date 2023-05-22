@@ -3,14 +3,14 @@
   <form @submit:prevent="signUp">
     <InputText type="text" class="custom-input" v-model="newUser.username" placeholder="Username" />
     <InputText type="text" v-model="newUser.email" placeholder="Email" />
-    <InputText type="text" v-model="newUser.password" placeholder="Password" />
-    <InputText type="text" placeholder="Confirm Password" />
+    <InputText type="password" v-model="newUser.password" placeholder="Password" />
+    <InputText type="password" placeholder="Confirm Password" />
     <Dropdown
       v-model="newUser.sexe"
-      :options="allowedSexes"
-      optionLabel="name"
-      placeholder="Sexe"
-      class="w-full md:w-14rem"
+      :options="genderOptions"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Select sexe"
     />
     <Button label="Submit" type="submit" />
   </form>
@@ -30,13 +30,16 @@ import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 
-const allowedSexes = [{ name: 'Male' }, { name: 'Female' }, { name: 'None' }]
-
-const newUser: NewUser = reactive({
+const genderOptions = [
+  { label: 'Male', value: 'male' },
+  { label: 'Female', value: 'female' },
+  { label: 'None', value: null }
+]
+const newUser: NewUser = reactive({ // ADAPTER DTO BACK
   username: '',
   email: '',
   password: '',
-  sexe: 'unknown'
+  sexe: null
 })
 const signUpError = ref('')
 
@@ -60,8 +63,9 @@ const signUp = async () => {
 
 <style scoped lang="scss">
 h1 {
-  margin: 3vh auto 5vh auto;
+  text-align: center;
 }
+
 form {
   width: 30vw;
   margin: 0 auto;
@@ -73,6 +77,12 @@ form {
     width: 15rem;
     margin-bottom: 1rem;
     font-size: 1.3rem;
+  }
+
+  :deep(.p-dropdown) {
+    width: 15rem;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
   }
 
   :deep(.p-button) {

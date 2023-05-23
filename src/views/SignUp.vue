@@ -26,7 +26,6 @@
       :options="genderOptions"
       optionLabel="label"
       optionValue="value"
-      placeholder="Select sexe"
     />
     <Button label="Submit" type="submit" />
   </form>
@@ -50,15 +49,15 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const genderOptions = [
-  { label: 'Male', value: 'male' },
-  { label: 'Female', value: 'female' },
-  { label: 'None', value: null }
+  { label: 'Male', value: 'M' },
+  { label: 'Female', value: 'F' },
+  { label: 'None', value: 'none' }
 ]
 const newUser: NewUser = reactive({
   username: '',
   email: '',
   password: '',
-  sexe: null
+  sexe: 'M'
 })
 
 const showPassword = ref(false)

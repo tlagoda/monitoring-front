@@ -6,7 +6,7 @@ import { routes } from './routes'
 import 'normalize.css'
 import 'primevue/resources/themes/vela-orange/theme.css';
 import 'primevue/resources/primevue.min.css';
-
+import 'primeicons/primeicons.css';
 
 export const router = createRouter({
   history: createWebHistory(),

@@ -3,8 +3,14 @@
   <form @submit:prevent="signUp">
     <InputText type="text" class="custom-input" v-model="newUser.username" placeholder="Username" />
     <InputText type="text" v-model="newUser.email" placeholder="Email" />
-    <InputText type="password" v-model="newUser.password" placeholder="Password" />
-    <InputText type="password" placeholder="Confirm Password" />
+    <span class="p-input-icon-right">
+      <InputText type="password" v-model="newUser.password" placeholder="Password" />
+      <i class="pi pi-eye" />
+    </span>
+    <span class="p-input-icon-right">
+      <InputText type="password" placeholder="Confirm Password" />
+      <i class="pi pi-eye" />
+    </span>
     <Dropdown
       v-model="newUser.sexe"
       :options="genderOptions"
@@ -16,7 +22,10 @@
   </form>
 
   <div class="signin-link">
-    Already have an account? <router-link to="/signin" style="color: inherit">Sign in</router-link>
+    <p>
+      Already have an account?
+      <router-link to="/signin" style="color: inherit">Sign in</router-link>
+    </p>
   </div>
 </template>
 
@@ -35,12 +44,17 @@ const genderOptions = [
   { label: 'Female', value: 'female' },
   { label: 'None', value: null }
 ]
-const newUser: NewUser = reactive({ // ADAPTER DTO BACK
+const newUser: NewUser = reactive({
+  // ADAPTER DTO BACK
   username: '',
   email: '',
   password: '',
   sexe: null
 })
+
+const showPassword = ref(false)
+const showPasswordConfirm = ref(false)
+
 const signUpError = ref('')
 
 const rules = {
@@ -64,6 +78,7 @@ const signUp = async () => {
 <style scoped lang="scss">
 h1 {
   text-align: center;
+  margin: 2rem 0;
 }
 
 form {
@@ -76,22 +91,38 @@ form {
   :deep(.p-inputtext) {
     width: 15rem;
     margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
     font-size: 1.3rem;
+    border-radius: 1rem;
+  }
+  span > i {
+    font-size: 1.3rem;
+    margin-top: -1.1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   :deep(.p-dropdown) {
     width: 15rem;
     font-size: 1.3rem;
     margin-bottom: 1rem;
+    border-radius: 1rem;
   }
 
   :deep(.p-button) {
     font-size: 1.5rem;
     padding: 0.5rem 1.5rem;
+    margin: 1rem 0;
   }
 }
 
 .signin-link {
-  margin: 20px auto 0 auto;
+  width: 100vw;
+
+  p {
+    text-align: center;
+  }
 }
 </style>

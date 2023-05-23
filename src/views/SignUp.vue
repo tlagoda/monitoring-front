@@ -4,12 +4,22 @@
     <InputText type="text" class="custom-input" v-model="newUser.username" placeholder="Username" />
     <InputText type="text" v-model="newUser.email" placeholder="Email" />
     <span class="p-input-icon-right">
-      <InputText type="password" v-model="newUser.password" placeholder="Password" />
-      <i class="pi pi-eye" />
+      <InputText
+        :type="showPassword ? 'text' : 'password'"
+        v-model="newUser.password"
+        placeholder="Password"
+      />
+      <i
+        :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
+        @click="togglePassword"
+      />
     </span>
     <span class="p-input-icon-right">
-      <InputText type="password" placeholder="Confirm Password" />
-      <i class="pi pi-eye" />
+      <InputText :type="showPassword ? 'text' : 'password'" placeholder="Confirm Password" />
+      <i
+        :class="{ pi: true, 'pi-eye': !showPasswordConfirm, 'pi-eye-slash': showPasswordConfirm }"
+        @click="togglePasswordConfirm"
+      />
     </span>
     <Dropdown
       v-model="newUser.sexe"
@@ -45,7 +55,6 @@ const genderOptions = [
   { label: 'None', value: null }
 ]
 const newUser: NewUser = reactive({
-  // ADAPTER DTO BACK
   username: '',
   email: '',
   password: '',
@@ -55,22 +64,24 @@ const newUser: NewUser = reactive({
 const showPassword = ref(false)
 const showPasswordConfirm = ref(false)
 
-const signUpError = ref('')
-
-const rules = {
-  required: (value: string) => !!value || 'Required.',
-  passwordMatch: (value: string) => value === newUser.password || "Passwords don't match."
+const togglePassword = () => {
+  showPassword.value = !showPassword.value
 }
+
+const togglePasswordConfirm = () => {
+  showPasswordConfirm.value = !showPasswordConfirm.value
+}
+
 const signUp = async () => {
   try {
     const response = await AuthService.signup(newUser)
     if (response.statusCode === 201) {
       router.push('/')
     } else {
-      signUpError.value = "Canno't sign up."
+      // signUpError.value = "Canno't sign up."
     }
   } catch (err: any) {
-    signUpError.value = err.message
+    // signUpError.value = err.message
   }
 }
 </script>
@@ -95,11 +106,17 @@ form {
     font-size: 1.3rem;
     border-radius: 1rem;
   }
-  span > i {
-    font-size: 1.3rem;
-    margin-top: -1.1rem;
 
-    &:hover {
+  .p-input-icon-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .pi {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
       cursor: pointer;
     }
   }

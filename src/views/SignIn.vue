@@ -1,25 +1,24 @@
 <template>
   <h1>Sign in! 🔥</h1>
-  <!-- <v-form ref="form" @submit.prevent="signIn">
-    <v-text-field label="Email" required :rules="[rules.required]" v-model="email"></v-text-field>
-    <v-text-field
-      label="Password"
-      type="password"
-      required
-      :rules="[rules.required]"
-      v-model="password"
-    ></v-text-field>
-    <p v-if="signInError" class="error-message">{{ signInError }}</p>
-    <div class="d-flex align-center justify-center">
-      <v-btn type="submit" color="red">Sign in</v-btn>
-    </div>
-  </v-form>
-  <div class="signup-link">
-    Not registered yet? <router-link style="color: inherit" to="/signup">Sign up</router-link>
-  </div> -->
+  <form @submit:prevent="signIn">
+    <InputText type="text" v-model="email" placeholder="Email" />
+    <span class="p-input-icon-right">
+      <InputText
+        :type="showPassword ? 'text' : 'password'"
+        v-model="password"
+        placeholder="Password"
+      />
+      <i
+        :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
+        @click="togglePassword"
+      />
+    </span>
+  </form>
 </template>
 
 <script lang="ts" setup>
+import InputText from 'primevue/inputtext'
+import Button from 'primevue/button'
 import { useRouter } from 'vue-router'
 import { AuthService } from '@/services/auth.service.'
 import { ref } from 'vue'
@@ -27,7 +26,12 @@ import { ref } from 'vue'
 const router = useRouter()
 const email = ref('')
 const password = ref('')
-let signInError = ref('')
+const signInError = ref('')
+const showPassword = ref(false)
+
+const togglePassword = () => {
+  showPassword.value = !showPassword.value
+}
 
 const rules = {
   required: (value: string) => !!value || 'Required.'
@@ -56,13 +60,18 @@ const signIn = async () => {
 h1 {
   margin: 3vh auto 5vh auto;
 }
-.v-form {
-  width: 20vw;
-  margin: 0 auto;
+
+h1 {
+  text-align: center;
+  margin: 2rem 0;
 }
 
-.v-btn {
-  width: 45%;
+form {
+  width: 30vw;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .signup-link {

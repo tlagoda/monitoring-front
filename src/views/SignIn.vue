@@ -13,6 +13,7 @@
         @click="togglePassword"
       />
     </span>
+    <Button label="Submit" type="submit" />
   </form>
 </template>
 
@@ -31,10 +32,6 @@ const showPassword = ref(false)
 
 const togglePassword = () => {
   showPassword.value = !showPassword.value
-}
-
-const rules = {
-  required: (value: string) => !!value || 'Required.'
 }
 
 const signIn = async () => {
@@ -56,7 +53,7 @@ const signIn = async () => {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 h1 {
   margin: 3vh auto 5vh auto;
 }
@@ -72,6 +69,35 @@ form {
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  :deep(.p-inputtext) {
+    width: 15rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.3rem;
+    border-radius: 1rem;
+  }
+
+  .p-input-icon-right {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .pi {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+  }
+
+  :deep(.p-button) {
+    font-size: 1.5rem;
+    padding: 0.5rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 1rem;
+  }
 }
 
 .signup-link {

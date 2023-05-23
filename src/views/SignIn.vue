@@ -73,7 +73,7 @@ form {
   :deep(.p-inputtext) {
     width: 15rem;
     margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem 0.5rem 1rem;
     font-size: 1.3rem;
     border-radius: 1rem;
   }

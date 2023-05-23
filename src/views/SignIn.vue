@@ -15,6 +15,12 @@
     </span>
     <Button label="Submit" type="submit" />
   </form>
+  <div class="signin-link">
+    <p>
+      Don't have an account yet?
+      <router-link to="/signup" style="color: inherit">Register now</router-link>
+    </p>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -100,7 +106,11 @@ form {
   }
 }
 
-.signup-link {
-  margin: 20px auto 0 auto;
+.signin-link {
+  width: 100vw;
+
+  p {
+    text-align: center;
+  }
 }
 </style>

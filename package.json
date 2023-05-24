@@ -20,9 +20,11 @@
     "primeicons": "^6.0.1",
     "primevue": "^3.29.1",
     "roboto-fontface": "*",
+    "vee-validate": "^4.9.5",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6",
-    "webfontloader": "^1.0.0"
+    "webfontloader": "^1.0.0",
+    "yup": "^1.1.1"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",

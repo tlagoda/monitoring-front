@@ -6,14 +6,16 @@
     <span class="p-input-icon-right">
       <InputText
         :type="showPassword ? 'text' : 'password'"
-        v-model="newUser.password"
+        v-model="passwordValue"
         placeholder="Password"
+        aria-describedby="password"
       />
       <i
         :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
         @click="togglePassword"
       />
     </span>
+    <small id="password" v-if="passwordError">{{ passwordError }}</small>
     <span class="p-input-icon-right">
       <InputText :type="showPassword ? 'text' : 'password'" placeholder="Confirm Password" />
       <i
@@ -46,6 +48,9 @@ import { AuthService } from '@/services/auth.service.'
 import type { NewUser } from '@/types/auth/types'
 import { reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useField } from 'vee-validate'
+import * as Yup from 'yup'
+
 const router = useRouter()
 
 const genderOptions = [
@@ -70,6 +75,12 @@ const togglePassword = () => {
 const togglePasswordConfirm = () => {
   showPasswordConfirm.value = !showPasswordConfirm.value
 }
+
+const passwordSchema = Yup.string().min(8, 'Password must be at least 8 characters').required()
+const { value: passwordValue, errorMessage: passwordError } = useField<string>(
+  'password',
+  passwordSchema
+)
 
 const signUp = async () => {
   try {

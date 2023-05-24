@@ -53,6 +53,8 @@ import * as Yup from 'yup'
 
 const router = useRouter()
 
+// User data
+
 const genderOptions = [
   { label: 'Male', value: 'M' },
   { label: 'Female', value: 'F' },
@@ -62,8 +64,10 @@ const newUser: NewUser = reactive({
   username: '',
   email: '',
   password: '',
-  sexe: 'M'
+  gender: 'M'
 })
+
+// Handle password toggle
 
 const showPassword = ref(false)
 const showPasswordConfirm = ref(false)
@@ -76,11 +80,15 @@ const togglePasswordConfirm = () => {
   showPasswordConfirm.value = !showPasswordConfirm.value
 }
 
+// Form validations
+
 const passwordSchema = Yup.string().min(8, 'Password must be at least 8 characters').required()
 const { value: passwordValue, errorMessage: passwordError } = useField<string>(
   'password',
   passwordSchema
 )
+
+// Submit
 
 const signUp = async () => {
   try {

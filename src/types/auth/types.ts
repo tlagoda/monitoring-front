@@ -7,5 +7,5 @@ export type NewUser = {
   username: string
   email: string
   password: string
-  sexe: 'M' | 'F' | null
+  gender: 'M' | 'F' | null
 }

@@ -31,12 +31,6 @@
       />
     </span>
     <small id="confirmPassword" v-if="confirmPasswordError">{{ confirmPasswordError }}</small>
-    <Dropdown
-      v-model="newUser.gender"
-      :options="genderOptions"
-      optionLabel="label"
-      optionValue="value"
-    />
     <Button label="Submit" type="submit" />
   </form>
 
@@ -51,7 +45,6 @@
 <script lang="ts" setup>
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
-import Dropdown from 'primevue/dropdown'
 import { AuthService } from '@/services/auth.service.'
 import type { NewUser } from '@/types/auth/types'
 import { reactive, ref } from 'vue'
@@ -63,16 +56,10 @@ const router = useRouter()
 
 // User data
 
-const genderOptions = [
-  { label: 'Male', value: 'M' },
-  { label: 'Female', value: 'F' },
-  { label: 'None', value: 'none' }
-]
 const newUser: NewUser = reactive({
   username: '',
   email: '',
   password: '',
-  gender: 'M'
 })
 
 // Handle password toggle

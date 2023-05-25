@@ -1,14 +1,10 @@
 <template>
   <h1>Create your account! 🚀</h1>
   <form @submit.prevent="signUp">
-    <InputText
-      type="text"
-      class="custom-input"
-      v-model="formData.username"
-      placeholder="Username"
-    />
+    <InputText type="text" v-model="formData.username" placeholder="Username" />
     <small v-if="v$.username.$errors.length">{{ v$.username.$errors[0].$message }}</small>
     <InputText type="text" v-model="formData.email" placeholder="Email" />
+    <small v-if="v$.email.$errors.length">{{ v$.email.$errors[0].$message }}</small>
     <span class="p-input-icon-right">
       <InputText
         :type="showPassword ? 'text' : 'password'"
@@ -21,6 +17,7 @@
         @click="togglePassword"
       />
     </span>
+    <small v-if="v$.password.$errors.length">{{ v$.password.$errors[0].$message }}</small>
     <span class="p-input-icon-right">
       <InputText
         :type="showPasswordConfirm ? 'text' : 'password'"
@@ -33,9 +30,9 @@
         @click="togglePasswordConfirm"
       />
     </span>
-    <span v-for="error in v$.$errors" :key="error.$uid">
-      {{ error.$property }}: {{ error.$message }}
-    </span>
+    <small v-if="v$.confirmPassword.$errors.length">{{
+      v$.confirmPassword.$errors[0].$message
+    }}</small>
     <Button label="Submit" type="submit" />
   </form>
 
@@ -55,7 +52,7 @@ import type { NewUser } from '@/types/auth/types'
 import { reactive, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useVuelidate } from '@vuelidate/core'
-import { required, email, minLength, sameAs } from '@vuelidate/validators'
+import { required, email, minLength, sameAs, helpers } from '@vuelidate/validators'
 
 const router = useRouter()
 

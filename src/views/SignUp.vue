@@ -1,42 +1,51 @@
 <template>
   <h1>Create your account! 🚀</h1>
   <form @submit.prevent="signUp">
-    <InputText type="text" v-model="formData.username" placeholder="Username" />
-    <small v-if="v$.username.$errors.length">{{ v$.username.$errors[0].$message }}</small>
-    <InputText type="text" v-model="formData.email" placeholder="Email" />
-    <small class="error-msg" v-if="v$.email.$errors.length">{{
-      v$.email.$errors[0].$message
-    }}</small>
-    <span class="p-input-icon-right">
-      <InputText
-        :type="showPassword ? 'text' : 'password'"
-        v-model="formData.password"
-        placeholder="Password"
-        aria-describedby="password"
-      />
-      <i
-        :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
-        @click="togglePassword"
-      />
-    </span>
-    <small class="p-invalid" v-if="v$.password.$errors.length">{{
-      v$.password.$errors[0].$message
-    }}</small>
-    <span class="p-input-icon-right">
-      <InputText
-        :type="showPasswordConfirm ? 'text' : 'password'"
-        placeholder="Confirm Password"
-        v-model="formData.confirmPassword"
-        aria-describedby="confirmPassword"
-      />
-      <i
-        :class="{ pi: true, 'pi-eye': !showPasswordConfirm, 'pi-eye-slash': showPasswordConfirm }"
-        @click="togglePasswordConfirm"
-      />
-    </span>
-    <small v-if="v$.confirmPassword.$errors.length">{{
-      v$.confirmPassword.$errors[0].$message
-    }}</small>
+    <div class="input-section">
+      <InputText type="text" v-model="formData.username" placeholder="Username" />
+      <small v-if="v$.username.$errors.length">{{ v$.username.$errors[0].$message }}</small>
+    </div>
+    <div class="input-section">
+      <InputText type="text" v-model="formData.email" placeholder="Email" />
+      <small class="error-msg" v-if="v$.email.$errors.length">{{
+        v$.email.$errors[0].$message
+      }}</small>
+    </div>
+    <div class="input-section">
+      <span class="p-input-icon-right">
+        <InputText
+          :type="showPassword ? 'text' : 'password'"
+          v-model="formData.password"
+          placeholder="Password"
+          aria-describedby="password"
+        />
+        <i
+          :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
+          @click="togglePassword"
+        />
+      </span>
+      <small class="p-invalid" v-if="v$.password.$errors.length">{{
+        v$.password.$errors[0].$message
+      }}</small>
+    </div>
+    <div class="input-section">
+      <span class="p-input-icon-right">
+        <InputText
+          :type="showPasswordConfirm ? 'text' : 'password'"
+          placeholder="Confirm Password"
+          v-model="formData.confirmPassword"
+          aria-describedby="confirmPassword"
+        />
+        <i
+          :class="{ pi: true, 'pi-eye': !showPasswordConfirm, 'pi-eye-slash': showPasswordConfirm }"
+          @click="togglePasswordConfirm"
+        />
+      </span>
+      <small v-if="v$.confirmPassword.$errors.length">{{
+        v$.confirmPassword.$errors[0].$message
+      }}</small>
+    </div>
+
     <Button label="Submit" type="submit" />
   </form>
 
@@ -150,30 +159,36 @@ form {
   flex-direction: column;
   align-items: center;
 
-  :deep(.p-inputtext) {
-    width: 15rem;
+  .input-section {
     margin-bottom: 1rem;
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    font-size: 1.3rem;
-    border-radius: 1rem;
-  }
-
-  .p-input-icon-right {
     display: flex;
-    align-items: center;
-    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
 
-    .pi {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+    :deep(.p-inputtext) {
+      width: 15rem;
+      padding: 0.5rem 2rem 0.5rem 1rem;
       font-size: 1.3rem;
-      cursor: pointer;
+      border-radius: 1rem;
     }
-  }
+    .p-input-icon-right {
+      display: flex;
+      align-items: center;
+      position: relative;
 
-  small {
-    color: #dc143c;
+      .pi {
+        position: absolute;
+        top: 70%;
+        transform: translateY(-50%);
+        font-size: 1.3rem;
+        cursor: pointer;
+      }
+    }
+
+    small {
+      margin-top: 0.5rem;
+      color: #dc143c;
+    }
   }
 
   :deep(.p-button) {

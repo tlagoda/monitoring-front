@@ -55,7 +55,7 @@ import type { NewUser } from '@/types/auth/types'
 import { reactive, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useVuelidate } from '@vuelidate/core'
-import { required, email } from '@vuelidate/validators'
+import { required, email, minLength, sameAs } from '@vuelidate/validators'
 
 const router = useRouter()
 
@@ -77,10 +77,10 @@ const formData = reactive({
 // Form validations
 const rules = computed(() => {
   return {
-    username: { required },
+    username: { required, minLength: 6 },
     email: { required, email },
-    password: { required },
-    confirmPassword: { required }
+    password: { required, minLength: 6 },
+    confirmPassword: { required, sameAs: sameAs(formData.password) }
   }
 })
 

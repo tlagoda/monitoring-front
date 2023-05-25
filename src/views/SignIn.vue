@@ -9,6 +9,7 @@
         placeholder="Password"
       />
       <i
+        v-if="formData.password"
         :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
         @click="togglePassword"
       />
@@ -58,6 +59,8 @@ const rules = computed(() => {
   }
 })
 
+const v$ = useVuelidate(rules, formData)
+
 // Handle password toggle
 const showPassword = ref(false)
 
@@ -68,21 +71,21 @@ const togglePassword = () => {
 // Submit
 
 const signIn = async () => {
-  try {
-    const response = await AuthService.login({
-      email: email.value,
-      password: password.value
-    })
-    if (response.statusCode === 200) {
-      router.push('/')
-    } else {
-      signInError.value = response.message
-      password.value = ''
-    }
-  } catch (error: any) {
-    signInError.value = error.message
-    password.value = ''
-  }
+  // try {
+  //   const response = await AuthService.login({
+  //     email: email.value,
+  //     password: password.value
+  //   })
+  //   if (response.statusCode === 200) {
+  //     router.push('/')
+  //   } else {
+  //     signInError.value = response.message
+  //     password.value = ''
+  //   }
+  // } catch (error: any) {
+  //   signInError.value = error.message
+  //   password.value = ''
+  // }
 }
 </script>
 

@@ -4,7 +4,9 @@
     <InputText type="text" v-model="formData.username" placeholder="Username" />
     <small v-if="v$.username.$errors.length">{{ v$.username.$errors[0].$message }}</small>
     <InputText type="text" v-model="formData.email" placeholder="Email" />
-    <small v-if="v$.email.$errors.length">{{ v$.email.$errors[0].$message }}</small>
+    <small class="error-msg" v-if="v$.email.$errors.length">{{
+      v$.email.$errors[0].$message
+    }}</small>
     <span class="p-input-icon-right">
       <InputText
         :type="showPassword ? 'text' : 'password'"
@@ -17,7 +19,9 @@
         @click="togglePassword"
       />
     </span>
-    <small v-if="v$.password.$errors.length">{{ v$.password.$errors[0].$message }}</small>
+    <small class="p-invalid" v-if="v$.password.$errors.length">{{
+      v$.password.$errors[0].$message
+    }}</small>
     <span class="p-input-icon-right">
       <InputText
         :type="showPasswordConfirm ? 'text' : 'password'"
@@ -74,10 +78,25 @@ const formData = reactive({
 // Form validations
 const rules = computed(() => {
   return {
-    username: { required, minLength: 6 },
-    email: { required, email },
-    password: { required, minLength: 6 },
-    confirmPassword: { required, sameAs: sameAs(formData.password) }
+    username: {
+      required: helpers.withMessage('Username is required.', required),
+      minLength: helpers.withMessage('Username should be at least 6 characters.', minLength(6))
+    },
+    email: {
+      required: helpers.withMessage('Email is required.', required),
+      email: helpers.withMessage(
+        "This doesn't look like a valid email. Please check and try again.",
+        email
+      )
+    },
+    password: {
+      required: helpers.withMessage('Password is required.', required),
+      minLength: helpers.withMessage('Password should be at least 6 characters.', minLength(6))
+    },
+    confirmPassword: {
+      required: helpers.withMessage('Please confirm your password.', required),
+      sameAs: helpers.withMessage('Passwords do not match.', sameAs(formData.password))
+    }
   }
 })
 
@@ -153,11 +172,8 @@ form {
     }
   }
 
-  :deep(.p-dropdown) {
-    width: 15rem;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    border-radius: 1rem;
+  small {
+    color: #dc143c;
   }
 
   :deep(.p-button) {

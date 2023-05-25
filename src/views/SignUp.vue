@@ -1,12 +1,18 @@
 <template>
   <h1>Create your account! 🚀</h1>
   <form @submit.prevent="signUp">
-    <InputText type="text" class="custom-input" v-model="newUser.username" placeholder="Username" />
-    <InputText type="text" v-model="newUser.email" placeholder="Email" />
+    <InputText
+      type="text"
+      class="custom-input"
+      v-model="formData.username"
+      placeholder="Username"
+    />
+    <small v-if="v$.username.$errors.length">{{ v$.username.$errors[0].$message }}</small>
+    <InputText type="text" v-model="formData.email" placeholder="Email" />
     <span class="p-input-icon-right">
       <InputText
         :type="showPassword ? 'text' : 'password'"
-        v-model="newUser.password"
+        v-model="formData.password"
         placeholder="Password"
         aria-describedby="password"
       />
@@ -19,13 +25,16 @@
       <InputText
         :type="showPasswordConfirm ? 'text' : 'password'"
         placeholder="Confirm Password"
-        v-model="confirmPassword"
+        v-model="formData.confirmPassword"
         aria-describedby="confirmPassword"
       />
       <i
         :class="{ pi: true, 'pi-eye': !showPasswordConfirm, 'pi-eye-slash': showPasswordConfirm }"
         @click="togglePasswordConfirm"
       />
+    </span>
+    <span v-for="error in v$.$errors" :key="error.$uid">
+      {{ error.$property }}: {{ error.$message }}
     </span>
     <Button label="Submit" type="submit" />
   </form>
@@ -43,10 +52,10 @@ import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 import { AuthService } from '@/services/auth.service.'
 import type { NewUser } from '@/types/auth/types'
-import { reactive, ref } from 'vue'
+import { reactive, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { useField } from 'vee-validate'
-import * as Yup from 'yup'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email } from '@vuelidate/validators'
 
 const router = useRouter()
 
@@ -55,11 +64,30 @@ const router = useRouter()
 const newUser: NewUser = reactive({
   username: '',
   email: '',
-  password: '',
+  password: ''
 })
-const confirmPassword = ref('')
+
+const formData = reactive({
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+})
+
+// Form validations
+const rules = computed(() => {
+  return {
+    username: { required },
+    email: { required, email },
+    password: { required },
+    confirmPassword: { required }
+  }
+})
+
+const v$ = useVuelidate(rules, formData)
 
 // Handle password toggle
+const confirmPassword = ref('')
 
 const showPassword = ref(false)
 const showPasswordConfirm = ref(false)
@@ -77,17 +105,19 @@ const togglePasswordConfirm = () => {
 // Submit
 
 const signUp = async () => {
-  console.log('HELLO')
-  try {
-    const response = await AuthService.signup(newUser)
-    if (response.statusCode === 201) {
-      router.push('/')
-    } else {
-      // signUpError.value = "Canno't sign up."
-    }
-  } catch (err: any) {
-    // signUpError.value = err.message
-  }
+  const result = await v$.value.$validate()
+  alert(result)
+  // console.log('HELLO')
+  // try {
+  //   const response = await AuthService.signup(newUser)
+  //   if (response.statusCode === 201) {
+  //     router.push('/')
+  //   } else {
+  //     // signUpError.value = "Canno't sign up."
+  //   }
+  // } catch (err: any) {
+  //   // signUpError.value = err.message
+  // }
 }
 </script>
 

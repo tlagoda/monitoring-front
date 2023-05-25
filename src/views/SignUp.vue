@@ -1,36 +1,32 @@
 <template>
   <h1>Create your account! 🚀</h1>
-  <form @submit:prevent="signUp">
+  <form @submit.prevent="signUp">
     <InputText type="text" class="custom-input" v-model="newUser.username" placeholder="Username" />
     <InputText type="text" v-model="newUser.email" placeholder="Email" />
     <span class="p-input-icon-right">
       <InputText
         :type="showPassword ? 'text' : 'password'"
-        v-model="passwordValue"
+        v-model="newUser.password"
         placeholder="Password"
         aria-describedby="password"
-        :class="{ 'p-invalid': passwordError }"
       />
       <i
         :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
         @click="togglePassword"
       />
     </span>
-    <small id="password" v-if="passwordError">{{ passwordError }}</small>
     <span class="p-input-icon-right">
       <InputText
         :type="showPasswordConfirm ? 'text' : 'password'"
         placeholder="Confirm Password"
-        v-model="confirmPasswordValue"
+        v-model="confirmPassword"
         aria-describedby="confirmPassword"
-        :class="{ 'p-invalid': confirmPasswordError }"
       />
       <i
         :class="{ pi: true, 'pi-eye': !showPasswordConfirm, 'pi-eye-slash': showPasswordConfirm }"
         @click="togglePasswordConfirm"
       />
     </span>
-    <small id="confirmPassword" v-if="confirmPasswordError">{{ confirmPasswordError }}</small>
     <Button label="Submit" type="submit" />
   </form>
 
@@ -61,6 +57,7 @@ const newUser: NewUser = reactive({
   email: '',
   password: '',
 })
+const confirmPassword = ref('')
 
 // Handle password toggle
 
@@ -77,23 +74,10 @@ const togglePasswordConfirm = () => {
 
 // Form validations
 
-const passwordSchema = Yup.string().min(8, 'Password must be at least 8 characters').required()
-const passwordConfirmSchema = Yup.string()
-  .nullable()
-  .oneOf([Yup.ref('passwordSchema')], "Passwords don't match!")
-  .required('Required')
-const { value: passwordValue, errorMessage: passwordError } = useField<string>(
-  'password',
-  passwordSchema
-)
-const { value: confirmPasswordValue, errorMessage: confirmPasswordError } = useField<string>(
-  'confirmPassword',
-  passwordConfirmSchema
-)
-
 // Submit
 
 const signUp = async () => {
+  console.log('HELLO')
   try {
     const response = await AuthService.signup(newUser)
     if (response.statusCode === 201) {

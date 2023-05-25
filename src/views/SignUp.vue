@@ -20,6 +20,7 @@
           aria-describedby="password"
         />
         <i
+          v-if="formData.password"
           :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
           @click="togglePassword"
         />
@@ -37,9 +38,10 @@
           aria-describedby="confirmPassword"
         />
         <i
+          v-if="formData.confirmPassword"
           :class="{ pi: true, 'pi-eye': !showPasswordConfirm, 'pi-eye-slash': showPasswordConfirm }"
           @click="togglePasswordConfirm"
-        />
+        />  
       </span>
       <small v-if="v$.confirmPassword.$errors.length">{{
         v$.confirmPassword.$errors[0].$message
@@ -70,12 +72,6 @@ import { required, email, minLength, sameAs, helpers } from '@vuelidate/validato
 const router = useRouter()
 
 // User data
-
-const newUser: NewUser = reactive({
-  username: '',
-  email: '',
-  password: ''
-})
 
 const formData = reactive({
   username: '',
@@ -131,18 +127,24 @@ const togglePasswordConfirm = () => {
 
 const signUp = async () => {
   const result = await v$.value.$validate()
-  alert(result)
-  // console.log('HELLO')
-  // try {
-  //   const response = await AuthService.signup(newUser)
-  //   if (response.statusCode === 201) {
-  //     router.push('/')
-  //   } else {
-  //     // signUpError.value = "Canno't sign up."
-  //   }
-  // } catch (err: any) {
-  //   // signUpError.value = err.message
-  // }
+  if (!result) {
+    return
+  }
+
+  try {
+    const response = await AuthService.signup({
+      username: formData.username,
+      email: formData.email,
+      password: formData.confirmPassword
+    })
+    if (response.statusCode === 201) {
+      router.push('/')
+    } else {
+      alert('An error occured.')
+    }
+  } catch (err: any) {
+    alert('An error occured: ' + err.message)
+  }
 }
 </script>
 

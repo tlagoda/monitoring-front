@@ -1,11 +1,11 @@
 <template>
   <h1>Sign in! 🔥</h1>
   <form @submit:prevent="signIn">
-    <InputText type="text" v-model="email" placeholder="Email" />
+    <InputText type="text" v-model="formData.email" placeholder="Email" />
     <span class="p-input-icon-right">
       <InputText
         :type="showPassword ? 'text' : 'password'"
-        v-model="password"
+        v-model="formData.password"
         placeholder="Password"
       />
       <i
@@ -28,17 +28,44 @@ import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 import { useRouter } from 'vue-router'
 import { AuthService } from '@/services/auth.service.'
-import { ref } from 'vue'
+import { ref, reactive, computed } from 'vue'
+import { useVuelidate } from '@vuelidate/core'
+import { required, email, minLength, helpers } from '@vuelidate/validators'
 
 const router = useRouter()
-const email = ref('')
-const password = ref('')
 const signInError = ref('')
+
+const formData = reactive({
+  email: '',
+  password: ''
+})
+
+// Form validations
+
+const rules = computed(() => {
+  return {
+    email: {
+      required: helpers.withMessage('Please enter your email.', required),
+      email: helpers.withMessage(
+        "This doesn't look like a valid email. Please check and try again.",
+        email
+      )
+    },
+    password: {
+      required: helpers.withMessage('Please enter your password.', required),
+      minLength: helpers.withMessage('Your password should be at least 6 characters.', minLength(6))
+    }
+  }
+})
+
+// Handle password toggle
 const showPassword = ref(false)
 
 const togglePassword = () => {
   showPassword.value = !showPassword.value
 }
+
+// Submit
 
 const signIn = async () => {
   try {

@@ -71,8 +71,6 @@ import { required, email, minLength, sameAs, helpers } from '@vuelidate/validato
 
 const router = useRouter()
 
-// User data
-
 const formData = reactive({
   username: '',
   email: '',

@@ -3,9 +3,18 @@
   <Card>
     <template #content>
       <div class="content">
-        <InputText />
-        <InputText />
-        <InputText />
+        <div class="input-section">
+          <label for="">Exercise</label>
+          <InputText />
+        </div>
+        <div class="input-section">
+          <label for="">Muscles</label>
+          <InputText />
+        </div>
+        <div class="input-section">
+          <label for="">Comment</label>
+          <InputText />
+        </div>
       </div>
     </template>
   </Card>

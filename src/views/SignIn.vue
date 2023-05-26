@@ -1,19 +1,29 @@
 <template>
   <h1>Sign in! 🔥</h1>
   <form @submit.prevent="signIn">
-    <InputText type="text" v-model="formData.email" placeholder="Email" />
-    <span class="p-input-icon-right">
-      <InputText
-        :type="showPassword ? 'text' : 'password'"
-        v-model="formData.password"
-        placeholder="Password"
-      />
-      <i
-        v-if="formData.password"
-        :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
-        @click="togglePassword"
-      />
-    </span>
+    <div class="input-section">
+      <InputText type="text" v-model="formData.email" placeholder="Email" />
+      <small class="error-msg" v-if="v$.email.$errors.length">{{
+        v$.email.$errors[0].$message
+      }}</small>
+    </div>
+    <div class="input-section">
+      <span class="p-input-icon-right">
+        <InputText
+          :type="showPassword ? 'text' : 'password'"
+          v-model="formData.password"
+          placeholder="Password"
+        />
+        <i
+          v-if="formData.password"
+          :class="{ pi: true, 'pi-eye': !showPassword, 'pi-eye-slash': showPassword }"
+          @click="togglePassword"
+        />
+      </span>
+      <small class="error-msg" v-if="v$.password.$errors.length">{{
+        v$.password.$errors[0].$message
+      }}</small>
+    </div>
     <Button label="Submit" type="submit" />
   </form>
   <div class="signin-link">
@@ -112,28 +122,39 @@ form {
   flex-direction: column;
   align-items: center;
 
-  :deep(.p-inputtext) {
-    width: 15rem;
+  .input-section {
     margin-bottom: 1rem;
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    font-size: 1.3rem;
-    border-radius: 1rem;
-  }
-
-  .p-input-icon-right {
     display: flex;
-    align-items: center;
-    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
 
-    .pi {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
+    :deep(.p-inputtext) {
+      width: 15rem;
+      padding: 0.5rem 2rem 0.5rem 1rem;
       font-size: 1.3rem;
-      cursor: pointer;
+      border-radius: 1rem;
+    }
+
+    .p-input-icon-right {
+      display: flex;
+      align-items: center;
+      position: relative;
+
+      .pi {
+        position: absolute;
+        top: 70%;
+        transform: translateY(-50%);
+        font-size: 1.3rem;
+        cursor: pointer;
+      }
+    }
+
+    small {
+      max-width: 15rem;
+      margin-top: 0.5rem;
+      color: #dc143c;
     }
   }
-
   :deep(.p-button) {
     font-size: 1.5rem;
     padding: 0.5rem 1.5rem;

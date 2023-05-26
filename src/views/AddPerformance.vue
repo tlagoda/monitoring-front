@@ -12,6 +12,26 @@
           <InputText />
         </div>
         <div class="input-section">
+          <label for="">Date</label>
+          <InputText />
+        </div>
+        <div class="input-section">
+          <label for="">Sets</label>
+          <InputText />
+        </div>
+        <div class="input-section">
+          <label for="">Repetitions</label>
+          <InputText />
+        </div>
+        <div class="input-section">
+          <label for="">RestTime</label>
+          <InputText />
+        </div>
+        <div class="input-section">
+          <label for="">Weight</label>
+          <InputText />
+        </div>
+        <div class="input-section">
           <label for="">Comment</label>
           <InputText />
         </div>

@@ -2,11 +2,11 @@
   <h1>Create your account! 🚀</h1>
   <form @submit.prevent="signUp">
     <div class="input-section">
-      <InputText type="text" v-model="formData.username" placeholder="Username" />
+      <InputText type="text" v-model="formData.username" placeholder="Username" v-on:blur="v$.username.$touch()"/>
       <small v-if="v$.username.$errors.length">{{ v$.username.$errors[0].$message }}</small>
     </div>
     <div class="input-section">
-      <InputText type="text" v-model="formData.email" placeholder="Email" />
+      <InputText type="text" v-model="formData.email" placeholder="Email" v-on:blur="v$.email.$touch()"/>
       <small class="error-msg" v-if="v$.email.$errors.length">{{
         v$.email.$errors[0].$message
       }}</small>
@@ -18,6 +18,7 @@
           v-model="formData.password"
           placeholder="Password"
           aria-describedby="password"
+          v-on:blur="v$.password.$touch()"
         />
         <i
           v-if="formData.password"
@@ -36,6 +37,7 @@
           placeholder="Confirm Password"
           v-model="formData.confirmPassword"
           aria-describedby="confirmPassword"
+          v-on:blur="v$.confirmPassword.$touch()"
         />
         <i
           v-if="formData.confirmPassword"
@@ -63,7 +65,6 @@
 import InputText from 'primevue/inputtext'
 import Button from 'primevue/button'
 import { AuthService } from '@/services/auth.service.'
-import type { NewUser } from '@/types/auth/types'
 import { reactive, ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useVuelidate } from '@vuelidate/core'
@@ -186,6 +187,7 @@ form {
     }
 
     small {
+      width: 15rem;
       margin-top: 0.5rem;
       color: #dc143c;
     }

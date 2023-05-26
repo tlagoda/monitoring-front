@@ -2,7 +2,12 @@
   <h1>Sign in! 🔥</h1>
   <form @submit.prevent="signIn">
     <div class="input-section">
-      <InputText type="text" v-model="formData.email" placeholder="Email" />
+      <InputText
+        type="text"
+        v-model="formData.email"
+        placeholder="Email"
+        v-on:blur="v$.email.$touch()"
+      />
       <small class="error-msg" v-if="v$.email.$errors.length">{{
         v$.email.$errors[0].$message
       }}</small>
@@ -13,6 +18,7 @@
           :type="showPassword ? 'text' : 'password'"
           v-model="formData.password"
           placeholder="Password"
+          v-on:blur="v$.password.$touch()"
         />
         <i
           v-if="formData.password"

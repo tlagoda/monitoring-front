@@ -1,6 +1,6 @@
 <template>
   <h1>Sign in! 🔥</h1>
-  <form @submit:prevent="signIn">
+  <form @submit.prevent="signIn">
     <InputText type="text" v-model="formData.email" placeholder="Email" />
     <span class="p-input-icon-right">
       <InputText
@@ -71,21 +71,27 @@ const togglePassword = () => {
 // Submit
 
 const signIn = async () => {
-  // try {
-  //   const response = await AuthService.login({
-  //     email: email.value,
-  //     password: password.value
-  //   })
-  //   if (response.statusCode === 200) {
-  //     router.push('/')
-  //   } else {
-  //     signInError.value = response.message
-  //     password.value = ''
-  //   }
-  // } catch (error: any) {
-  //   signInError.value = error.message
-  //   password.value = ''
-  // }
+  const result = await v$.value.$validate()
+  if (!result) {
+    formData.password = ''
+    return
+  }
+
+  try {
+    const response = await AuthService.login({
+      email: formData.email,
+      password: formData.password
+    })
+    if (response.statusCode === 200) {
+      router.push('/')
+    } else {
+      signInError.value = response.message
+      formData.password = ''
+    }
+  } catch (error: any) {
+    signInError.value = error.message
+    formData.password = ''
+  }
 }
 </script>
 

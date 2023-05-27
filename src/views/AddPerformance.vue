@@ -120,6 +120,7 @@
       </div>
     </template>
   </Card>
+  <Toast position="bottom-right"/>
 </template>
 
 <script lang="ts" setup>
@@ -130,6 +131,8 @@ import InputNumber from 'primevue/inputnumber'
 import MultiSelect from 'primevue/multiselect'
 import Textarea from 'primevue/textarea'
 import Button from 'primevue/button'
+import Toast from 'primevue/toast'
+import { useToast } from 'primevue/usetoast'
 import { reactive, ref, computed } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers, maxLength, maxValue, minValue } from '@vuelidate/validators'
@@ -145,6 +148,7 @@ const yyyy = todayDate.getFullYear()
 today.value = mm + '/' + dd + '/' + yyyy
 
 const allowedMuscles = ref(['Biceps', 'Triceps'])
+
 const formData = reactive({
   date: today,
   exercise: '',
@@ -197,11 +201,11 @@ const rules = computed(() => {
 })
 
 const v$ = useVuelidate(rules, formData)
+const toast = useToast()
 
 const addPerformance = async () => {
   const result = await v$.value.$validate()
   if (!result) {
-    alert('Invalid form')
     return
   }
 
@@ -210,6 +214,7 @@ const addPerformance = async () => {
       ...formData,
       userInternalId: 'bda30706-0f68-46d5-b542-1d944c755a4c'
     })
+    toast.add({ severity: 'success', summary: 'Done 💪 ', detail: 'Performance added to your history!', life: 5000 })
   } catch (err: any) {
     alert('An error occured: ' + err.message)
   }

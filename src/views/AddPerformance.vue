@@ -4,7 +4,7 @@
     <template #content>
       <div class="content">
         <div class="input-section">
-          <label for="">Exercise</label>
+          <label for="">Exercise:</label>
           <InputText />
         </div>
         <div class="input-section">
@@ -60,6 +60,19 @@ h1 {
   .content {
     display: flex;
     flex-direction: column;
+
+    .input-section {
+      width: 60%;
+      margin: 0.5rem auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      label {
+        margin-right: 1rem;
+        font-size: 1.3rem;
+      }
+    }
   }
 }
 </style>

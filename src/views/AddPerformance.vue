@@ -6,35 +6,35 @@
         <form @submit.prevent="addPerformance">
           <div class="input-section">
             <label for="">Date</label>
-            <Calendar />
+            <Calendar v-model="formData.date" />
           </div>
           <div class="input-section">
             <label for="">Exercise</label>
-            <InputText />
+            <InputText v-model="formData.exercise" placeholder="Biceps Curl"/>
           </div>
           <div class="input-section">
             <label for="">Muscles</label>
-            <MultiSelect />
+            <MultiSelect display="chip" :options="muscles" v-model="formData.muscles" placeholder="Biceps"/>
           </div>
           <div class="input-section">
             <label for="">Sets</label>
-            <InputNumber />
+            <InputNumber v-model="formData.sets" suffix=" sets"/>
           </div>
           <div class="input-section">
             <label for="">Repetitions</label>
-            <InputNumber />
+            <InputNumber v-model="formData.repetitions" suffix=" reps" />
           </div>
           <div class="input-section">
-            <label for="">RestTime</label>
-            <InputNumber />
+            <label for="">Rest time</label>
+            <InputNumber suffix=" s" v-model="formData.restTime" />
           </div>
           <div class="input-section">
             <label for="">Weight</label>
-            <InputNumber  suffix=" lbs" />
+            <InputNumber suffix=" lbs" v-model="formData.weight" />
           </div>
           <div class="input-section">
             <label for="">Comment</label>
-            <Textarea />
+            <Textarea placeholder="What an amazing session!" v-model="formData.comment" />
           </div>
           <Button label="Add" type="submit" />
         </form>
@@ -51,6 +51,29 @@ import InputNumber from 'primevue/inputnumber'
 import MultiSelect from 'primevue/multiselect'
 import Textarea from 'primevue/textarea'
 import Button from 'primevue/button'
+import { reactive, ref } from 'vue'
+
+const today = ref('')
+
+const todayDate = new Date()
+const dd = String(todayDate.getDate()).padStart(2, '0')
+const mm = String(todayDate.getMonth() + 1).padStart(2, '0')
+const yyyy = todayDate.getFullYear()
+
+today.value = mm + '/' + dd + '/' + yyyy
+
+const muscles = ref(['Biceps', 'Triceps'])
+
+const formData = reactive({
+  date: today,
+  exercise: '',
+  muscles: [],
+  sets: 5,
+  repetitions: 10,
+  restTime: 60,
+  weight: 40,
+  comment: ''
+})
 
 const addPerformance = () => {}
 </script>

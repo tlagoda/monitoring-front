@@ -4,42 +4,83 @@
     <template #content>
       <div class="content">
         <form @submit.prevent="addPerformance">
-          <div class="input-section">
+          <div class="field-section">
             <label for="">Date</label>
-            <Calendar v-model="formData.date" />
+            <div class="input-section">
+              <Calendar v-model="formData.date" />
+              <small class="error-msg" v-if="v$.date.$errors.length">{{
+                v$.date.$errors[0].$message
+              }}</small>
+            </div>
           </div>
-          <div class="input-section">
+          <div class="field-section">
             <label for="">Exercise</label>
-            <InputText v-model="formData.exercise" placeholder="Biceps Curl" />
+            <div class="input-section">
+              <InputText v-model="formData.exercise" placeholder="Biceps Curl" />
+              <small class="error-msg" v-if="v$.exercise.$errors.length">{{
+                v$.exercise.$errors[0].$message
+              }}</small>
+            </div>
           </div>
-          <div class="input-section">
+
+          <div class="field-section">
             <label for="">Muscles</label>
-            <MultiSelect
-              display="chip"
-              :options="allowedMuscles.concat(uu)"
-              v-model="formData.muscles"
-              placeholder="Biceps"
-            />
+            <div class="input-section">
+              <MultiSelect
+                display="chip"
+                :options="allowedMuscles.concat(uu)"
+                v-model="formData.muscles"
+                placeholder="Biceps"
+              />
+              <small class="error-msg" v-if="v$.muscles.$errors.length">{{
+                v$.muscles.$errors[0].$message
+              }}</small>
+            </div>
           </div>
-          <div class="input-section">
+          <div class="field-section">
             <label for="">Sets</label>
-            <InputNumber v-model="formData.sets" suffix=" sets" :min="1" :max="100" />
+            <div class="input-section">
+              <InputNumber v-model="formData.sets" suffix=" sets" :min="1" :max="100" />
+              <small class="error-msg" v-if="v$.sets.$errors.length">{{
+                v$.sets.$errors[0].$message
+              }}</small>
+            </div>
           </div>
-          <div class="input-section">
+          <div class="field-section">
             <label for="">Repetitions</label>
-            <InputNumber v-model="formData.repetitions" suffix=" reps" :min="1" :max="100" />
+            <div class="input-section">
+              <InputNumber v-model="formData.repetitions" suffix=" reps" :min="1" :max="100" />
+              <small class="error-msg" v-if="v$.repetitions.$errors.length">{{
+                v$.repetitions.$errors[0].$message
+              }}</small>
+            </div>
           </div>
-          <div class="input-section">
+          <div class="field-section">
             <label for="">Rest time</label>
-            <InputNumber suffix=" s" v-model="formData.restTime" :min="0" :max="3600" />
+            <div class="input-section">
+              <InputNumber suffix=" s" v-model="formData.restTime" :min="0" :max="3600" />
+              <small class="error-msg" v-if="v$.restTime.$errors.length">{{
+                v$.restTime.$errors[0].$message
+              }}</small>
+            </div>
           </div>
-          <div class="input-section">
+          <div class="field-section">
             <label for="">Weight</label>
-            <InputNumber suffix=" lbs" v-model="formData.weight" :min="1" :max="300" />
+            <div class="input-section">
+              <InputNumber suffix=" lbs" v-model="formData.weight" :min="1" :max="300" />
+              <small class="error-msg" v-if="v$.weight.$errors.length">{{
+                v$.weight.$errors[0].$message
+              }}</small>
+            </div>
           </div>
-          <div class="input-section">
+          <div class="field-section">
             <label for="">Comment</label>
-            <Textarea placeholder="What an amazing session!" v-model="formData.comment" />
+            <div class="input-section">
+              <Textarea placeholder="What an amazing session!" v-model="formData.comment" />
+              <small class="error-msg" v-if="v$.comment.$errors.length">{{
+                v$.comment.$errors[0].$message
+              }}</small>
+            </div>
           </div>
           <Button label="Add" type="submit" />
         </form>
@@ -124,7 +165,12 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData)
 
-const addPerformance = () => {}
+const addPerformance = async () => {
+  const result = await v$.value.$validate()
+  if (!result) {
+    alert('Invalid form')
+  }
+}
 </script>
 
 <style scoped lang="scss">
@@ -145,7 +191,7 @@ h1 {
       display: flex;
       flex-direction: column;
     }
-    .input-section {
+    .field-section {
       width: 80%;
       margin: 0.5rem auto;
       display: flex;
@@ -156,8 +202,17 @@ h1 {
         font-size: 1.3rem;
       }
 
-      & > :last-child {
-        width: 15rem;
+      .input-section {
+        display: flex;
+        flex-direction: column;
+
+        & > :first-child {
+          width: 15rem;
+        }
+
+        small {
+          color: #dc143c;
+        }
       }
     }
 

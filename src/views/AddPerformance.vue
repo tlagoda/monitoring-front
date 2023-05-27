@@ -18,19 +18,19 @@
           </div>
           <div class="input-section">
             <label for="">Sets</label>
-            <InputNumber v-model="formData.sets" suffix=" sets"/>
+            <InputNumber v-model="formData.sets" suffix=" sets" :min="1" :max="100"/>
           </div>
           <div class="input-section">
             <label for="">Repetitions</label>
-            <InputNumber v-model="formData.repetitions" suffix=" reps" />
+            <InputNumber v-model="formData.repetitions" suffix=" reps" :min="1" :max="100"/>
           </div>
           <div class="input-section">
             <label for="">Rest time</label>
-            <InputNumber suffix=" s" v-model="formData.restTime" />
+            <InputNumber suffix=" s" v-model="formData.restTime" :min="0" :max="3600"/>
           </div>
           <div class="input-section">
             <label for="">Weight</label>
-            <InputNumber suffix=" lbs" v-model="formData.weight" />
+            <InputNumber suffix=" lbs" v-model="formData.weight" :min="1" :max="300"/>
           </div>
           <div class="input-section">
             <label for="">Comment</label>

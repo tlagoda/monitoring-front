@@ -3,38 +3,41 @@
   <Card>
     <template #content>
       <div class="content">
-        <div class="input-section">
-          <label for="">Exercise:</label>
-          <InputText />
-        </div>
-        <div class="input-section">
-          <label for="">Muscles</label>
-          <InputText />
-        </div>
-        <div class="input-section">
-          <label for="">Date</label>
-          <InputText />
-        </div>
-        <div class="input-section">
-          <label for="">Sets</label>
-          <InputText />
-        </div>
-        <div class="input-section">
-          <label for="">Repetitions</label>
-          <InputText />
-        </div>
-        <div class="input-section">
-          <label for="">RestTime</label>
-          <InputText />
-        </div>
-        <div class="input-section">
-          <label for="">Weight</label>
-          <InputText />
-        </div>
-        <div class="input-section">
-          <label for="">Comment</label>
-          <InputText />
-        </div>
+        <form @submit.prevent="addPerformance">
+          <div class="input-section">
+            <label for="">Date</label>
+            <Calendar />
+          </div>
+          <div class="input-section">
+            <label for="">Exercise</label>
+            <InputText />
+          </div>
+          <div class="input-section">
+            <label for="">Muscles</label>
+            <MultiSelect />
+          </div>
+          <div class="input-section">
+            <label for="">Sets</label>
+            <InputText />
+          </div>
+          <div class="input-section">
+            <label for="">Repetitions</label>
+            <InputText />
+          </div>
+          <div class="input-section">
+            <label for="">RestTime</label>
+            <InputText />
+          </div>
+          <div class="input-section">
+            <label for="">Weight</label>
+            <InputText />
+          </div>
+          <div class="input-section">
+            <label for="">Comment</label>
+            <Textarea />
+          </div>
+          <Button label="Add" type="submit" />
+        </form>
       </div>
     </template>
   </Card>
@@ -42,7 +45,13 @@
 
 <script lang="ts" setup>
 import Card from 'primevue/card'
+import Calendar from 'primevue/calendar'
 import InputText from 'primevue/inputtext'
+import MultiSelect from 'primevue/multiselect'
+import Textarea from 'primevue/textarea'
+import Button from 'primevue/button'
+
+const addPerformance = () => {}
 </script>
 
 <style scoped lang="scss">

@@ -120,7 +120,7 @@
       </div>
     </template>
   </Card>
-  <Toast position="bottom-right"/>
+  <Toast position="bottom-right" />
 </template>
 
 <script lang="ts" setup>
@@ -214,7 +214,14 @@ const addPerformance = async () => {
       ...formData,
       userInternalId: 'bda30706-0f68-46d5-b542-1d944c755a4c'
     })
-    toast.add({ severity: 'success', summary: 'Done 💪 ', detail: 'Performance added to your history!', life: 5000 })
+    if (response.statusCode === 201) {
+      toast.add({
+        severity: 'success',
+        summary: 'Done 💪 ',
+        detail: 'Performance added to your history!',
+        life: 5000
+      })
+    }
   } catch (err: any) {
     alert('An error occured: ' + err.message)
   }

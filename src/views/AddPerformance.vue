@@ -202,6 +202,7 @@ const addPerformance = async () => {
   const result = await v$.value.$validate()
   if (!result) {
     alert('Invalid form')
+    return
   }
 }
 </script>

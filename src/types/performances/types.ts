@@ -11,3 +11,15 @@ export type PerformanceFilter = {
   muscles?: string[]
   comments?: string
 }
+
+export type PerformanceCreate = {
+  date: string,
+  userInternalId: string,
+  exercise: string,
+  sets: number,
+  repetitions: number,
+  restTime: number,
+  weight: number,
+  muscles?: string[],
+  comments?: string
+}

@@ -7,7 +7,7 @@
           <div class="field-section">
             <label for="">Date</label>
             <div class="input-section">
-              <Calendar v-model="formData.date" />
+              <Calendar v-model="formData.date" v-on:blur="v$.date.$touch()" />
               <small class="error-msg" v-if="v$.date.$errors.length">{{
                 v$.date.$errors[0].$message
               }}</small>
@@ -16,7 +16,11 @@
           <div class="field-section">
             <label for="">Exercise</label>
             <div class="input-section">
-              <InputText v-model="formData.exercise" placeholder="Biceps Curl" />
+              <InputText
+                v-model="formData.exercise"
+                placeholder="Biceps Curl"
+                v-on:blur="v$.exercise.$touch()"
+              />
               <small class="error-msg" v-if="v$.exercise.$errors.length">{{
                 v$.exercise.$errors[0].$message
               }}</small>
@@ -31,6 +35,7 @@
                 :options="allowedMuscles.concat(uu)"
                 v-model="formData.muscles"
                 placeholder="Biceps"
+                v-on:blur="v$.muscles.$touch()"
               />
               <small class="error-msg" v-if="v$.muscles.$errors.length">{{
                 v$.muscles.$errors[0].$message
@@ -40,7 +45,13 @@
           <div class="field-section">
             <label for="">Sets</label>
             <div class="input-section">
-              <InputNumber v-model="formData.sets" suffix=" sets" :min="1" :max="100" />
+              <InputNumber
+                v-model="formData.sets"
+                suffix=" sets"
+                :min="1"
+                :max="100"
+                v-on:blur="v$.sets.$touch()"
+              />
               <small class="error-msg" v-if="v$.sets.$errors.length">{{
                 v$.sets.$errors[0].$message
               }}</small>
@@ -49,7 +60,13 @@
           <div class="field-section">
             <label for="">Repetitions</label>
             <div class="input-section">
-              <InputNumber v-model="formData.repetitions" suffix=" reps" :min="1" :max="100" />
+              <InputNumber
+                v-model="formData.repetitions"
+                suffix=" reps"
+                :min="1"
+                :max="100"
+                v-on:blur="v$.repetitions.$touch()"
+              />
               <small class="error-msg" v-if="v$.repetitions.$errors.length">{{
                 v$.repetitions.$errors[0].$message
               }}</small>
@@ -58,7 +75,13 @@
           <div class="field-section">
             <label for="">Rest time</label>
             <div class="input-section">
-              <InputNumber suffix=" s" v-model="formData.restTime" :min="0" :max="3600" />
+              <InputNumber
+                suffix=" s"
+                v-model="formData.restTime"
+                :min="0"
+                :max="3600"
+                v-on:blur="v$.restTime.$touch()"
+              />
               <small class="error-msg" v-if="v$.restTime.$errors.length">{{
                 v$.restTime.$errors[0].$message
               }}</small>
@@ -67,7 +90,13 @@
           <div class="field-section">
             <label for="">Weight</label>
             <div class="input-section">
-              <InputNumber suffix=" lbs" v-model="formData.weight" :min="1" :max="300" />
+              <InputNumber
+                suffix=" lbs"
+                v-model="formData.weight"
+                :min="1"
+                :max="300"
+                v-on:blur="v$.weight.$touch()"
+              />
               <small class="error-msg" v-if="v$.weight.$errors.length">{{
                 v$.weight.$errors[0].$message
               }}</small>
@@ -76,7 +105,11 @@
           <div class="field-section">
             <label for="">Comment</label>
             <div class="input-section">
-              <Textarea placeholder="What an amazing session!" v-model="formData.comment" />
+              <Textarea
+                placeholder="What an amazing session!"
+                v-model="formData.comment"
+                v-on:blur="v$.comment.$touch()"
+              />
               <small class="error-msg" v-if="v$.comment.$errors.length">{{
                 v$.comment.$errors[0].$message
               }}</small>

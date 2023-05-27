@@ -18,19 +18,19 @@
           </div>
           <div class="input-section">
             <label for="">Sets</label>
-            <InputNumber :inputStyle="{ width: '12rem'}"/>
+            <InputNumber />
           </div>
           <div class="input-section">
             <label for="">Repetitions</label>
-            <InputNumber :inputStyle="{ width: '12rem'}"/>
+            <InputNumber />
           </div>
           <div class="input-section">
             <label for="">RestTime</label>
-            <InputNumber :inputStyle="{ width: '12rem'}"/>
+            <InputNumber />
           </div>
           <div class="input-section">
             <label for="">Weight</label>
-            <InputNumber :inputStyle="{ width: '12rem'}" suffix=" lbs" />
+            <InputNumber  suffix=" lbs" />
           </div>
           <div class="input-section">
             <label for="">Comment</label>

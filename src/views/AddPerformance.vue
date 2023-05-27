@@ -221,6 +221,8 @@ const addPerformance = async () => {
         detail: 'Performance added to your history!',
         life: 5000
       })
+    } else {
+      throw new Error('Unable to create performance.')
     }
   } catch (err: any) {
     alert('An error occured: ' + err.message)

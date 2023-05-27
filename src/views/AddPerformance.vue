@@ -32,7 +32,7 @@
             <div class="input-section">
               <MultiSelect
                 display="chip"
-                :options="allowedMuscles.concat(uu)"
+                :options="allowedMuscles"
                 v-model="formData.muscles"
                 placeholder="Biceps"
                 v-on:blur="v$.muscles.$touch()"
@@ -120,6 +120,7 @@
       </div>
     </template>
   </Card>
+  <Toast position="bottom-right" />
 </template>
 
 <script lang="ts" setup>
@@ -130,9 +131,12 @@ import InputNumber from 'primevue/inputnumber'
 import MultiSelect from 'primevue/multiselect'
 import Textarea from 'primevue/textarea'
 import Button from 'primevue/button'
+import Toast from 'primevue/toast'
+import { useToast } from 'primevue/usetoast'
 import { reactive, ref, computed } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers, maxLength, maxValue, minValue } from '@vuelidate/validators'
+import { PerformanceService } from '@/services/performances.service'
 
 const today = ref('')
 
@@ -144,7 +148,7 @@ const yyyy = todayDate.getFullYear()
 today.value = mm + '/' + dd + '/' + yyyy
 
 const allowedMuscles = ref(['Biceps', 'Triceps'])
-const uu = ['aa']
+
 const formData = reactive({
   date: today,
   exercise: '',
@@ -197,11 +201,31 @@ const rules = computed(() => {
 })
 
 const v$ = useVuelidate(rules, formData)
+const toast = useToast()
 
 const addPerformance = async () => {
   const result = await v$.value.$validate()
   if (!result) {
-    alert('Invalid form')
+    return
+  }
+
+  try {
+    const response = await PerformanceService.createPerformance({
+      ...formData,
+      userInternalId: 'bda30706-0f68-46d5-b542-1d944c755a4c'
+    })
+    if (response.statusCode === 201) {
+      toast.add({
+        severity: 'success',
+        summary: 'Done 💪 ',
+        detail: 'Performance added to your history!',
+        life: 5000
+      })
+    } else {
+      throw new Error('Unable to create performance.')
+    }
+  } catch (err: any) {
+    alert('An error occured: ' + err.message)
   }
 }
 </script>

@@ -107,8 +107,6 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, formData)
 
 // Handle password toggle
-const confirmPassword = ref('')
-
 const showPassword = ref(false)
 const showPasswordConfirm = ref(false)
 

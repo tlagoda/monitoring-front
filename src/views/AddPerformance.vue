@@ -149,7 +149,7 @@ today.value = mm + '/' + dd + '/' + yyyy
 
 const allowedMuscles = ref(['Biceps', 'Triceps'])
 
-const formData = reactive({
+const getInitialFormData = () => ({
   date: today,
   exercise: '',
   muscles: [],
@@ -160,6 +160,9 @@ const formData = reactive({
   comment: ''
 })
 
+const formData = reactive(getInitialFormData())
+
+const resetFormData = () => Object.assign(formData, getInitialFormData());
 // Form Validations
 
 const rules = computed(() => {
@@ -221,6 +224,7 @@ const addPerformance = async () => {
         detail: 'Performance added to your history!',
         life: 5000
       })
+      resetFormData()
     } else {
       throw new Error('Unable to create performance.')
     }

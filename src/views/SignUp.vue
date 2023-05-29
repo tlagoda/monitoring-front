@@ -2,11 +2,21 @@
   <h1>Create your account! 🚀</h1>
   <form @submit.prevent="signUp">
     <div class="input-section">
-      <InputText type="text" v-model="formData.username" placeholder="Username" v-on:blur="v$.username.$touch()"/>
+      <InputText
+        type="text"
+        v-model="formData.username"
+        placeholder="Username"
+        v-on:blur="v$.username.$touch()"
+      />
       <small v-if="v$.username.$errors.length">{{ v$.username.$errors[0].$message }}</small>
     </div>
     <div class="input-section">
-      <InputText type="text" v-model="formData.email" placeholder="Email" v-on:blur="v$.email.$touch()"/>
+      <InputText
+        type="text"
+        v-model="formData.email"
+        placeholder="Email"
+        v-on:blur="v$.email.$touch()"
+      />
       <small class="error-msg" v-if="v$.email.$errors.length">{{
         v$.email.$errors[0].$message
       }}</small>
@@ -43,7 +53,7 @@
           v-if="formData.confirmPassword"
           :class="{ pi: true, 'pi-eye': !showPasswordConfirm, 'pi-eye-slash': showPasswordConfirm }"
           @click="togglePasswordConfirm"
-        />  
+        />
       </span>
       <small v-if="v$.confirmPassword.$errors.length">{{
         v$.confirmPassword.$errors[0].$message
@@ -106,6 +116,12 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData)
 
+// Reset form
+const resetForm = () => {
+  formData.password = ''
+  formData.confirmPassword = ''
+}
+
 // Handle password toggle
 const showPassword = ref(false)
 const showPasswordConfirm = ref(false)
@@ -137,9 +153,11 @@ const signUp = async () => {
     if (response.statusCode === 201) {
       router.push('/')
     } else {
+      resetForm()
       alert('An error occured.')
     }
   } catch (err: any) {
+    resetForm()
     alert('An error occured: ' + err.message)
   }
 }
